@@ -3,8 +3,6 @@
 
 using namespace std;
 
-
-
 double rectangle(const double a,const double b);
 
 double triangle(const double a,const double b, const double c);
@@ -14,10 +12,10 @@ int main()
 {
 	double a,b,c;
 	cout<<"Введите 3 числа";
-  cin>>a>>b>>c;
+cin>>a>>b>>c;
 
 	double Rectangle = rectangle(a,b);
-  double Triangle = triangle(a,b,c);
+double Triangle = triangle(a,b,c);
 
 	cout<<Rectangle<<" "<<Triangle;
 	return 0;
