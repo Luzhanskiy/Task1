@@ -17,15 +17,16 @@ double gety(const double x);
 */
 int main()
 {
-  const double x = 0;
-  const auto y = gety(x);
+    const double k= 0.05;
+  double x = 0;
+    while ( x <= 0.86)
+        {
+        double y=Gety(x);;
+        std::cout<<"x= " <<x<<"  y= " <<y <<std::endl;
+        x=x+k;
+        }
 }
-
-double gety(const double x)
+double Gety (const double x)
 {
-  for(double x = 0; x <= 0.85; x = x + 0.05)
-  {
-    cout << "y = " << x - (1/(3 + sin(3.6 * x)) << endl;
-  }
-  return 0.85;
+    return x - 1/(3+ sin (3.6* x));
 }
