@@ -9,7 +9,7 @@ using namespace std;
 * \return Возвращает значение функции y
 **/
 
-double gety(const double x);
+double get_y(const double x);
 
 /**
 * \brief Точка входа в программу.
@@ -26,7 +26,7 @@ int main()
         x=x+k;
         }
 }
-double Gety (const double x)
+double Get_y (const double x)
 {
     return x - 1/(3+ sin (3.6* x));
 }
