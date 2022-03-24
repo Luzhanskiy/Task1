@@ -1,4 +1,4 @@
-#include <iostream>
+include <iostream>
 using namespace std;
 
 
@@ -8,26 +8,33 @@ void output_array(int* ar, unsigned  int n);
 int function1(int* ar, unsigned int  n);
 unsigned int function2(int* ar, unsigned int  n);
 unsigned int function3(int* ar, unsigned int  n);
-
+const int randomrange = 401;
+const int randomoffset = 200;
 int main()
 {
 	setlocale(LC_ALL, "rus");
 	const int left = -100;
 	const int right = 200;
 	unsigned int n;
+	
 	cout << " введите размерность массива " << endl;
 	cin >> n;
 	int* ar = new int[n];
-	cout << " вы хотите ввести чила вручную(1) или заполнить случайно(0)?" << endl;
+	cout << " вы хотите ввести чила вручную(0) или заполнить случайно(1)?" << endl;
+
+	enum input_method {manual, random};
 	int b;
+	
+
 	while (true)
 	{
 		cin >> b;
-		switch (b)
+
+		switch (static_cast<input_method>(b))
 		{
-		case 1: input_manual(ar, n, left, right);
+		case manual: input_manual(ar, n, left, right);
 			break;
-		case 0: input_random(ar, n, left, right);
+		case random: input_random(ar, n, left, right);
 			break;
 		default:
 			cout << " можно вводить только 1 или 0" << endl;
@@ -49,13 +56,13 @@ int main()
 	unsigned int r = function2(ar, n);//количество элементов, значения которых положительны и не превосходят заданного числа а
 	cout << " положительны элементы <=a : " << r << endl;
 	result = function3(ar, n);//номера последней пары разнознаковых чисел
-	if (result == 0)
+	if (result == -1)
 	{
 		cout << " нет таких пар " <<  endl;
 	}
 	else
 	{
-		cout << " индекс первого элемента последней разнознаковой пaры:"<< result - 1 << endl;
+		cout << " индекс первого элемента последней разнознаковой пaры:"<< result  << endl;
 	}
 	delete[] ar;
 }
@@ -84,7 +91,7 @@ void input_random(int* ar, unsigned int n, int left, int right)
 {
 	for (unsigned int i = 0; i < n; ++i)
 	{
-		ar[i] = rand() % 31 - 15;
+		ar[i] = rand() %  randomrange - randomoffset;
 	}
 }
 
@@ -130,17 +137,17 @@ unsigned int function2(int* ar, unsigned int  n )//количество элем
 
 unsigned int function3(int* ar, unsigned int  n )// номера последней пары разнознаковых чисел
 {
-	unsigned int k = 0;
-	bool pozitive = ar[0] >= 0;
-	for (unsigned int i = 1; i < n; ++i)
+	
+	
+	for (unsigned int i = n-1; i > 0; --i)
 	{
-		if (pozitive && (ar[i] < 0) || !pozitive && (ar[i] >= 0))
+		if (ar[i] * ar[i - 1] < 0)
 		{
-			k = i;
-			pozitive = ar[i] >= 0;
+			return i - 1;
 		}
+	
 	}
 
-	return k;
+	return -1;
 	
 }
